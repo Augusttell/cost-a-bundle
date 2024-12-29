@@ -19,7 +19,7 @@ const LoanCalculator = () => {
   useEffect(() => {
     if (externalData) {
       toast({
-        title: "Market Data Loaded",
+        title: "Example API",
         description: `Current average interest rate: ${externalData.averageInterestRate}%`,
       });
     }
@@ -51,12 +51,12 @@ const LoanCalculator = () => {
       <Card className="w-full max-w-4xl mx-auto p-6 space-y-8">
         {isLoading && (
           <div className="text-center text-muted-foreground">
-            Loading market data...
+            Loading Example API data...
           </div>
         )}
         {error && (
           <div className="text-center text-destructive">
-            Failed to load market data
+            Failed to load Example API data
           </div>
         )}
         <div className="space-y-6">
