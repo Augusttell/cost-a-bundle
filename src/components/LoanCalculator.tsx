@@ -3,12 +3,26 @@ import InputSlider from "./InputSlider";
 import ResultsDisplay from "./ResultsDisplay";
 import { Card } from "@/components/ui/card";
 import Map from "./Map";
+import { useExternalData } from "@/hooks/useExternalData";
+import { toast } from "./ui/use-toast";
 
 const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(100000);
   const [loanTerm, setLoanTerm] = useState(30);
   const [interestRate, setInterestRate] = useState(5);
   const [additionalCosts, setAdditionalCosts] = useState(2000);
+
+  const { data: externalData, isLoading, error } = useExternalData();
+
+  // Show toast when external data is loaded
+  React.useEffect(() => {
+    if (externalData) {
+      toast({
+        title: "Market Data Loaded",
+        description: `Current average interest rate: ${externalData.averageInterestRate}%`,
+      });
+    }
+  }, [externalData]);
 
   const calculateLoan = () => {
     const monthlyRate = interestRate / 100 / 12;
@@ -34,6 +48,16 @@ const LoanCalculator = () => {
   return (
     <div className="space-y-8">
       <Card className="w-full max-w-4xl mx-auto p-6 space-y-8">
+        {isLoading && (
+          <div className="text-center text-muted-foreground">
+            Loading market data...
+          </div>
+        )}
+        {error && (
+          <div className="text-center text-destructive">
+            Failed to load market data
+          </div>
+        )}
         <div className="space-y-6">
           <InputSlider
             label="Loan Amount"
