@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputSlider from "./InputSlider";
 import ResultsDisplay from "./ResultsDisplay";
 import { Card } from "@/components/ui/card";
+import Map from "./Map";
 
 const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(100000);
@@ -31,47 +32,54 @@ const LoanCalculator = () => {
   const results = calculateLoan();
 
   return (
-    <Card className="w-full max-w-4xl mx-auto p-6 space-y-8">
-      <div className="space-y-6">
-        <InputSlider
-          label="Loan Amount"
-          value={loanAmount}
-          onChange={setLoanAmount}
-          min={10000}
-          max={1000000}
-          step={1000}
-          unit="$"
-        />
-        <InputSlider
-          label="Loan Term"
-          value={loanTerm}
-          onChange={setLoanTerm}
-          min={1}
-          max={30}
-          step={1}
-          unit="years"
-        />
-        <InputSlider
-          label="Interest Rate (APR)"
-          value={interestRate}
-          onChange={setInterestRate}
-          min={0.1}
-          max={15}
-          step={0.1}
-          unit="%"
-        />
-        <InputSlider
-          label="Additional Costs"
-          value={additionalCosts}
-          onChange={setAdditionalCosts}
-          min={0}
-          max={10000}
-          step={100}
-          unit="$"
-        />
-      </div>
-      <ResultsDisplay {...results} />
-    </Card>
+    <div className="space-y-8">
+      <Card className="w-full max-w-4xl mx-auto p-6 space-y-8">
+        <div className="space-y-6">
+          <InputSlider
+            label="Loan Amount"
+            value={loanAmount}
+            onChange={setLoanAmount}
+            min={10000}
+            max={1000000}
+            step={1000}
+            unit="$"
+          />
+          <InputSlider
+            label="Loan Term"
+            value={loanTerm}
+            onChange={setLoanTerm}
+            min={1}
+            max={30}
+            step={1}
+            unit="years"
+          />
+          <InputSlider
+            label="Interest Rate (APR)"
+            value={interestRate}
+            onChange={setInterestRate}
+            min={0.1}
+            max={15}
+            step={0.1}
+            unit="%"
+          />
+          <InputSlider
+            label="Additional Costs"
+            value={additionalCosts}
+            onChange={setAdditionalCosts}
+            min={0}
+            max={10000}
+            step={100}
+            unit="$"
+          />
+        </div>
+        <ResultsDisplay {...results} />
+      </Card>
+      
+      <Card className="w-full max-w-4xl mx-auto p-6">
+        <h2 className="text-2xl font-semibold mb-4">Property Location</h2>
+        <Map />
+      </Card>
+    </div>
   );
 };
 
