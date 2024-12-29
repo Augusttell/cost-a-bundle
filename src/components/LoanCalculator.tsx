@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import Map from "./Map";
 import { useExternalData } from "@/hooks/useExternalData";
 import { toast } from "./ui/use-toast";
+import { useEffect } from "react";
 
 const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(100000);
@@ -15,7 +16,7 @@ const LoanCalculator = () => {
   const { data: externalData, isLoading, error } = useExternalData();
 
   // Show toast when external data is loaded
-  React.useEffect(() => {
+  useEffect(() => {
     if (externalData) {
       toast({
         title: "Market Data Loaded",
